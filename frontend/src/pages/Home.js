@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import WorkoutDetails from "../components/WorkoutDetails";
+import WorkoutForm from "../components/WorkoutForm";
 
 const Home = () => {
 
@@ -12,10 +13,7 @@ const Home = () => {
             const json = await response.json()
 
             if(response.ok){
-                debugger;
                 setWorkouts(json)
-            }else{
-                debugger;
             }
         }
 
@@ -29,6 +27,7 @@ const Home = () => {
                     <WorkoutDetails id={workout._id} workout={workout} />
                 ))}
             </div>
+            <WorkoutForm />
         </div>
      );
 }

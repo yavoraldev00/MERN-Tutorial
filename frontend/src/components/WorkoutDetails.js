@@ -5,6 +5,7 @@ const WorkoutDetails = ({ workout }) => {
             <p><strong>Sets: {workout.sets}</strong></p>
             <p><strong>Reps: {workout.reps}</strong></p>
             <p>Created at: {workout.createdAt}</p>
+            <p>id: {workout._id}</p>
         </div>
      );
 }
