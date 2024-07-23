@@ -1,14 +1,22 @@
 require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
 const workoutRoutes = require('./Routes/workouts')
+const cors = require("cors") // cross server request enabler
 
 // express app
 const app = express()
 
 // middleware
 app.use(express.json())
+
+// using cors
+const corsOptions = {
+  origin: 'http://localhost:4000'
+}
+
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)
