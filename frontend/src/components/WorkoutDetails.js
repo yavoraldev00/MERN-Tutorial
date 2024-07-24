@@ -1,8 +1,12 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
+// date fns (not installed with npm does not function correctly)
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutsContext();
+
+    debugger;
 
     const handleDelete = async () => {
         const response = await fetch("http://localhost:4000/api/workouts/" + workout._id, {
@@ -21,9 +25,9 @@ const WorkoutDetails = ({ workout }) => {
             <h4>{workout.title}</h4>
             <p><strong>Sets: {workout.sets}</strong></p>
             <p><strong>Reps: {workout.reps}</strong></p>
-            <p>Created at: {workout.createdAt}</p>
+            <p>Created at: workout.createdAt</p>
             <p>id: {workout._id}</p>
-            <span onClick={handleDelete}>Delete</span>
+            <span onClick={handleDelete} className="material-symbols-outlined">Delete</span>
         </div>
      );
 }
