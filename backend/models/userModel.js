@@ -42,11 +42,33 @@ userSchema.statics.signup = async function (email, password){
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    debugger;
-
     const user = await this.create({ email, password: hash})
 
     return user
+}
+
+// static login method
+userSchema.statics.login = async function (email, password){
+
+    // validation checks
+
+    if(!email || !password){
+        throw Error("All fields are required")
+    }
+
+    const user = await this.findOne({ email })
+
+    if (!user){
+        throw Error("E-mail not found")
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match){
+        throw Error("Incorrect password")
+    }
+
+    return user;
 }
 
 module.exports = mongoose.model("User", userSchema);
