@@ -17,7 +17,7 @@ export const authReducer = (state, action) => {
     }
 }
 
-export const WorkoutsContextProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
     const [authState, dispatch] = useReducer(authReducer, {
         user: null
     })
@@ -25,8 +25,8 @@ export const WorkoutsContextProvider = ({ children }) => {
     console.log("Auth state - ", authState)
 
     return (
-        <WorkoutsContext.Provider value={{...authState, dispatch}}>
+        <AuthContext.Provider value={{...authState, dispatch}}>
             { children }
-        </WorkoutsContext.Provider>
+        </AuthContext.Provider>
     )
 }
