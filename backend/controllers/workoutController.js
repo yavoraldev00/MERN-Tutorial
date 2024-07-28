@@ -4,8 +4,11 @@ const Workout = require("../models/workoutModel")
 
 // GET ALL workouts
 const getWorkouts = async (req, res) => {
-    const workouts = await Workout.find({}).sort({createdAt: -1})
+    const user_id = req.headers.authorization;
+    const workouts = await Workout.find({user_id}).sort({createdAt: -1})
 
+    // newWorkouts = workouts.forEach(e=>{console.log(e["user_id"] == user_id)})
+    // debugger;
     res.json(workouts);
 }
 
@@ -30,6 +33,8 @@ const getWorkout = async (req, res) => {
 // POST a workout
 const createWorkout = async (req, res) => {
     const { title, reps, sets } = req.body;
+    debugger;
+    const user_id = req.headers.authorization;
 
     let emptyFields = []
 
@@ -49,7 +54,7 @@ const createWorkout = async (req, res) => {
     }
 
     try {
-      const workout = await Workout.create({sets,reps,title})
+      const workout = await Workout.create({sets,reps,title, user_id})
       res.status(200).json(workout)
     } catch (error) {
       res.status(400).json({mssg: error.message})
